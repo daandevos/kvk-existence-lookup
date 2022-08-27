@@ -31,6 +31,20 @@
                     </form>
                 </div>
             </div>
+            @if (session()->has('result'))
+                <div class="mx-auto w-full md:w-1/2 overflow-hidden shadow border border-gray-200 rounded-lg mt-4">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h1 class="text-lg font-semibold mb-2">Result</h1>
+                        <p class="mb-6 text-sm text-gray-500">If the color of the number is red, the company is not registered (anymore).</p>
+                        <ul>
+                            @foreach(session()->get('result') as $number => $available)
+                                <li class="{{ $available ? 'text-green-500' : 'text-red-500' }}">{{ $number }}</li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+            @endif
         </div>
     </body>
 </html>
