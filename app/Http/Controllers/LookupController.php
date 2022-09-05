@@ -20,9 +20,12 @@ class LookupController extends Controller
             ]);
 
             try {
-                $response = Http::withHeaders([
-                    'apiKey' => config('kvk.key'),
-                ])->get(config('kvk.url'), $queries);
+
+                $response = Http::withoutVerifying()
+                    ->withHeaders([
+                        'apiKey' => config('kvk.key'),
+                    ])
+                    ->get(config('kvk.url'), $queries);
 
                 $result[$number] = true;
 

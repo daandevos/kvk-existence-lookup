@@ -22,6 +22,9 @@
                             <div class="mt-1">
                                 <textarea rows="4" name="numbers" id="numbers" class="p-2 border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
                             </div>
+                            @if($errors->has('numbers'))
+                                <div class="text-red-500 mt-2">{{ $errors->first('numbers') }}</div>
+                            @endif
                         </div>
                         <div class="mt-2 flex justify-end">
                             <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
