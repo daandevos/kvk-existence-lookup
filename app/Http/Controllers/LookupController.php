@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LookupRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class LookupController extends Controller
 {
-    private const KVK_API_URL = 'https://developers.kvk.nl/test/api/v1/zoeken';
-
     public function __invoke(LookupRequest $request)
     {
         $result = [];
@@ -23,7 +20,9 @@ class LookupController extends Controller
             ]);
 
             try {
-                $response = Http::get(self::KVK_API_URL, $queries);
+                $response = Http::withHeaders([
+                    'apiKey' => config('kvk.key'),
+                ])->get(config('kvk.url'), $queries);
 
                 $result[$number] = true;
 
